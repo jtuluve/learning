@@ -1,0 +1,185 @@
+ <style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  
+}
+
+#menuBar {
+  width:100%;
+  height:40px;
+  background-color: #E0E0E0;
+  border: 1px solid gray;
+}
+
+#logo {
+  padding: 10px 0px 0px 20px;
+  font-weight: bold;
+  font-size: 120%;
+  float: left;
+}
+
+#buttonDiv {
+  float: right;
+  padding: 5px 10px 0 0;
+}
+
+#runButton {
+  font-size: 120%;
+}
+
+#toggles {
+  width: 193px;
+  margin: 0 auto;
+  list-style: none;
+  border: 1px solid gray;
+  border-radius: 3px;
+  height: 27px;
+  padding: 0;
+  margin-top: 5px;
+}
+
+#toggles li {
+  float: left;
+  border-right: 1px solid gray;
+  padding: 5px 6px;
+}
+
+.clear {
+  clear:both;
+}
+
+.codeContainer {
+
+  height: 100%;
+  width:50%;
+  float:left;
+  position: relative;
+}
+
+.codeContainer textarea {
+  width: 100%;
+  height:100%;
+  border: none;
+  border-right: 2px solid gray;
+  font-family: Courier;
+  font-size: 115%;
+  padding: 30px 8px 0 8px;
+  /*border-box includes padding and border in width*/
+  box-sizing: border-box;
+}
+
+.codeLabel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+}
+
+#CSSContainer, #JSContainer {
+  display: none;
+}
+
+
+iframe {
+  height: 100%;
+  position: relative;
+  left: 20px;
+  border:none;
+}
+
+.selected {
+  background-color:gray;
+}
+
+
+</style>
+
+ <div id="wrapper">
+  
+  <div id="menuBar">
+    <div id="logo">CodeRunner
+    </div>
+    
+    <div id="buttonDiv">
+      <button id="runButton">Run</button>
+    </div>
+    
+    <ul id="toggles">
+      <li class="toggle selected">HTML</li>
+      <li class="toggle">CSS</li>
+      <li class="toggle">JS</li>
+      <li class="toggle selected">Result</li>
+    </ul>
+    
+  </div>
+  <!--end menuBar-->
+  <!--clear floats-->
+  <div class="clear"></div>
+  
+  <div class="codeContainer" id="HTMLContainer">
+    <div class="codeLabel"> HTML
+    </div>
+    <textarea name="" id="htmlCode" cols="30" rows="10">Write your code here...</textarea>
+  </div>
+
+<div class="codeContainer" id="HTMLContainer">
+    <div class="codeLabel"> HTML
+    </div>
+    <textarea name="" id="htmlCode" cols="30" rows="10">Write your code here...</textarea>
+  </div>
+  
+  <div class="codeContainer" id="CSSContainer">
+    <div class="codeLabel"> CSS
+    </div>
+    <textarea name="" id="cssCode" cols="30" rows="10">Write your code here...</textarea>
+  </div>
+  
+  <div class="codeContainer" id="JSContainer">
+    <div class="codeLabel"> JavaScript
+    </div>
+    <textarea name="" id="jsCode" cols="30" rows="10">JS functionality to be added later for security reasons</textarea>
+  </div>
+
+  <div class="codeContainer" id="ResultContainer">
+    <div class="codeLabel"> Result
+    </div>
+    <iframe id="resultFrame" src="" frameborder="0"></iframe>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+//subtracts menu height from window to get code height
+var windowHeight = $(window).height();
+var menuBarHeight = $("#menuBar").height();
+var codeContainerHeight = windowHeight - menuBarHeight;
+$(".codeContainer").height(codeContainerHeight + "px");
+
+$(".toggle").click(function(){
+  //changes background of active buttons
+  $(this).toggleClass("selected");
+  
+  //creates var activeDiv which stores content of html tag i.e. HTML, CSS, JS, Result
+  var activeDiv = $(this).html();
+  //uses activeDiv var to select the container ID and uses toggle fnc to toggle display
+  $("#" + activeDiv + "Container").toggle();
+  
+  //counts the # of active divs using filter fnc to return # of divs with css display != none
+  var showingDivs = $(".codeContainer").filter(function(){
+    return($(this).css("display")!="none");
+  }).length;
+  
+  //changes the css width of the containers by dividing number of showing divs
+  var width = 100/showingDivs;
+  $(".codeContainer").width(width + "%");
+  
+});
+
+$("#runButton").click(function(){
+    $("iframe").contents().find("html").html('<style>'+$("#cssCode").val()+'</style>'+$("#htmlCode").val());
+
+  
+});
+</script>
