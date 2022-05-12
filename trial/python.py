@@ -1,4 +1,4 @@
-<script type ="text/python">
+
 fo.write("Content-type:text/html\r\n\r\n")
 fo.write("<html>")
 fo.write("<head>")
@@ -11,4 +11,4 @@ fo.write("</body>")
 fo.write("</html>")
 
 fo.close()
-</script>
+
