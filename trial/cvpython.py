@@ -1,5 +1,5 @@
 import cgitb
-cgitb.enable()
+cgitb.enable(display=1, logdir=None, context=5, format='html')
 
 form = cgi.FieldStorage()
 
