@@ -1,14 +1,17 @@
+import cgi
+import cgitb #found this but isn't used?
 
-fo.write("Content-type:text/html\r\n\r\n")
-fo.write("<html>")
-fo.write("<head>")
-fo.write("<title>Hello - Second CGI Program</title>")
-fo.write("</head>")
-fo.write("<body>")
-fo.write("<h2>Your name is {}. {} {}</h2>".format("last_name", "first_name", "last_name"))
+form = cgi.FieldStorage()
 
-fo.write("</body>")
-fo.write("</html>")
+first_name = form.getvalue('first_name').capitalize()
+last_name  = form.getvalue('last_name').capitalize()
 
-fo.close()
-
+print ("Content-type:text/html\r\n\r\n")
+print ("<html>")
+print ("<head>")
+print ("<title>Hello - Second CGI Program</title>")
+print ("</head>")
+print ("<body>")
+print ("<h2>Your name is {}. {} {}</h2>".format(last_name, first_name, last_name))
+print ("</body>")
+print ("</html>")
