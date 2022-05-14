@@ -6,4 +6,4 @@ form = cgi.FieldStorage()
 
 username = form.getvalue("username")
 
-print username
+print(f"{username}")
