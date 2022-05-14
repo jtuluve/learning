@@ -5,4 +5,4 @@ form = cgi.FieldStorage()
 
 username = form.getvalue("username")
 
-print(f"{username}")
+print(f"<h1>{username}</h1>")
