@@ -1,6 +1,5 @@
-print("Content-type: text/html\n\n";)
-
-import cgi
+import cgitb
+cgitb.enable()
 
 form = cgi.FieldStorage()
 
