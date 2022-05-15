@@ -1,8 +1,12 @@
-import cgitb
-cgitb.enable(display=1, logdir=None, context=5, format='html')
+fo.write("Content-type:text/html\r\n\r\n")
+fo.write("<html>")
+fo.write("<head>")
+fo.write("<title>Hello - Second CGI Program</title>")
+fo.write("</head>")
+fo.write("<body>")
+fo.write("<h2>Your name is {}. {} {}</h2>".format("last_name", "first_name", "last_name"))
 
-form = cgi.FieldStorage()
+fo.write("</body>")
+fo.write("</html>")
 
-username = form.getvalue("username")
-
-print(f"<h1>{username}</h1>")
+fo.close()
